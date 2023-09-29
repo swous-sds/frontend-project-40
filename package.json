@@ -1,0 +1,26 @@
+{
+  "name": "@hexlet/code",
+  "version": "1.0.0",
+  "description": "Node.js boilerplate package\"",
+  "bin": {
+    "gendiff": "bin/gendiff.js"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swous-sds/frontend-project-46.git"
+  },
+  "author": "Sophie Rakhinshtein",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/swous-sds/frontend-project-46/issues"
+  },
+  "type": "module",
+  "homepage": "https://github.com/swous-sds/frontend-project-46#readme",
+  "dependencies": {
+    "commander": "^11.0.0"
+  }
+}
