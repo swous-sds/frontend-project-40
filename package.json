@@ -22,6 +22,12 @@
   "homepage": "https://github.com/swous-sds/frontend-project-46#readme",
   "dependencies": {
     "commander": "^11.0.0",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "mkdirp": "^3.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.50.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.28.1"
   }
 }

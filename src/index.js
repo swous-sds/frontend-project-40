@@ -1,12 +1,18 @@
-﻿import path from 'node:path';
+﻿
+import path from 'node:path';
 import { readFileSync } from 'node:fs';
 import _ from 'lodash';
 
-const resolvePath = (filePath) => (filePath.includes('__fixtures__') ? path.resolve(process.cwd(), filePath) : path.resolve(process.cwd(), `__fixtures__/${filePath}`));
+const resolvePath = (filePath) => 
+(filePath.includes('fixtures') 
+  ? path.resolve(process.cwd(), filePath) 
+  : path.resolve(process.cwd(), `__fixtures__/${filePath}`));
 
 const gendiff = (filePath1, filePath2) => {
     const path1 = resolvePath(filePath1);
     const path2 = resolvePath(filePath2);
+    console.log(path1,"Первый путть")
+   console.log(path2,"Второй путть")
     
     const file1 = readFileSync(path1, 'utf-8');
     const file2 = readFileSync(path2, 'utf-8');
@@ -35,4 +41,4 @@ const gendiff = (filePath1, filePath2) => {
     return result.join('\n');
 };
 
-export default gendiff();
+export default gendiff;
