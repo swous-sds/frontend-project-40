@@ -2,12 +2,10 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "description": "Node.js boilerplate package\"",
-  "bin": {
-    "gendiff": "bin/gendiff.js"
-  },
   "main": "src/index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx jest"
   },
   "repository": {
     "type": "git",
@@ -18,16 +16,21 @@
   "bugs": {
     "url": "https://github.com/swous-sds/frontend-project-46/issues"
   },
-  "type": "module",
   "homepage": "https://github.com/swous-sds/frontend-project-46#readme",
+  "bin": {
+    "gendiff": "bin/gendiff.js"
+  },
   "dependencies": {
     "commander": "^11.0.0",
+    "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
     "mkdirp": "^3.0.1"
   },
   "devDependencies": {
-    "eslint": "^8.50.0",
+    "@jest/globals": "^29.7.0",
+    "eslint": "^8.55.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.28.1"
+    "eslint-plugin-import": "^2.29.0",
+    "jest": "^29.7.0"
   }
 }
