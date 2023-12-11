@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import url from 'url';
 import { test, expect } from '@jest/globals';
 import { dirname } from 'node:path';
