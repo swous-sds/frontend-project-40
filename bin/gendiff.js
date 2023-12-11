@@ -11,7 +11,6 @@ program
   .option('-f, --format <type>', 'output format')
   .action((filePath1, filePath2) => {
     console.log(gendiff(filePath1, filePath2, program.opts().format));
-  });
+  })
 
-program.parse(process.argv);
-export default program;
+  .parse(process.argv);
