@@ -1,33 +1,49 @@
 import _ from 'lodash';
 
-const string = (value) => {
-  if (_.isObject(value) && value !== null) return '[complex value]';
-  if (_.isString(value)) return `'${value}'`;
-  return String(value);
+const getPath = (nodeNames) => nodeNames.flat().join('.');
+
+const getFormattedValue = (value) => {
+  switch (typeof value) {
+    case 'object': {
+      return !value ? 'null' : '[complex value]';
+    }
+    case 'string': {
+      return `'${value}'`;
+    }
+    default: {
+      return `${value}`;
+    }
+  }
 };
 
-const fullPath = (node, path) => {
-  if (path !== '') return `${path}.${node.key}`;
-  return String(node.key);
-};
-
-const createTree = (str, path) => str
-  .filter((node) => node.type !== 'unchanged')
-  .map((node) => {
-    const curPath = fullPath(node, path);
-    switch (node.type) {
-      case 'added':
-        return `Property '${curPath}' was added with value: ${string(node.value)}`;
-      case 'deleted':
-        return `Property '${curPath}' was removed`;
-      case 'changed':
-        return `Property '${curPath}' was updated. From ${string(node.value1)} to ${string(node.value2)}`;
-      case 'nested':
-        return createTree(node.children, curPath).join('\n');
-      default:
+export function makePlainDiff(tree) {
+  const iter = (node, path) => node.map((child) => {
+    const currentPath = getPath([path, child.key]);
+    switch (child.type) {
+      case 'nested': {
+        return iter(child.children, currentPath);
+      }
+      case 'added': {
+        return `Property '${currentPath}' was added with value: ${getFormattedValue(child.value)}`;
+      }
+      case 'removed': {
+        return `Property '${currentPath}' was removed`;
+      }
+      case 'changed': {
+        return `Property '${currentPath}' was updated. From ${getFormattedValue(child.oldValue)} to ${getFormattedValue(child.newValue)}`;
+      }
+      case 'unchanged': {
         return null;
+      }
+      default: {
+        throw Error('Uncorrect data');
+      }
     }
   });
+  return iter(tree.children, []);
+}
 
-const plainStyle = (tree) => createTree(tree, '').join('\n');
-export default plainStyle;
+export default function makePlain(data) {
+  const result = makePlainDiff(data);
+  return _.flattenDeep(result).filter((el) => el).join('\n');
+}
