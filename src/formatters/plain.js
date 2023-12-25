@@ -40,10 +40,3 @@ export function makePlainDiff(tree) {
       }
     }
   });
-  return iter(tree.children, []);
-}
-
-export default function makePlain(data) {
-  const result = makePlainDiff(data);
-  return _.flattenDeep(result).filter((el) => el).join('\n');
-}
